@@ -50,7 +50,7 @@
             </Label>
         </children>
     </GridPane>
-    <ChoiceBox fx:id="coin" prefWidth="150.0" />
+    <ChoiceBox fx:id="coin" prefWidth="150.0" onContextMenuRequested="#firegen"/>
     <Button fx:id="Generate" onAction="#chartGen" text="Generate Graph" />
     <GridPane>
         <columnConstraints>

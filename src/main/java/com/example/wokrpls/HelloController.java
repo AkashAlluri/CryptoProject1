@@ -56,6 +56,7 @@ public class HelloController {
 
     public HelloController() {
     }
+    public void firegen(){this.Generate.fire();}
 
     public void chartGen(ActionEvent event) throws IOException, ParseException {
         this.lineChart.getData().clear();
@@ -130,6 +131,7 @@ public class HelloController {
     }
 
     public void transactionWrapper(ActionEvent event) {
+        firegen();
         String s = (String)this.coin.getSelectionModel().getSelectedItem();
         double q = Double.parseDouble(this.quantity.getText());
         double p = Double.parseDouble(this.price.getText());
