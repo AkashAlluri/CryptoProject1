@@ -20,7 +20,7 @@ public class serverBridge {
             System.out.println("Checking if password matches for username");
             String sql="SELECT password from customerdata WHERE user_name ='"+username+"'";
             ResultSet rs=stmt.executeQuery(sql);
-            String passwordForGivenUserName= passwordChecker(rs);
+            String passwordForGivenUserName= resultSetChecker(rs);
             if(passwordForGivenUserName.equals(password)){System.out.println("LOGIN SUCCESS");return true;}
             else {
                 Alert a=new Alert(Alert.AlertType.NONE);
@@ -38,7 +38,7 @@ public class serverBridge {
     }
 
 
-    public String passwordChecker(ResultSet resultSet) throws SQLException {
+    public String resultSetChecker(ResultSet resultSet) throws SQLException {
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnsNumber = rsmd.getColumnCount();
         while (resultSet.next()) {
@@ -52,11 +52,11 @@ public class serverBridge {
     }
 
 
-    public void createAccount(String username, String password){
+    public void createAccount(String username, String password, String sq, String sa){
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Creating New Account");
-            String sql = "INSERT into customerdata values ('"+username+"','"+password+"',0,0,0,0)";
+            String sql = "INSERT into customerdata values ('"+username+"','"+password+"',0,0,0,0,'"+sq+"','"+sa+"')";
             stmt.execute(sql);
 
 
@@ -69,7 +69,54 @@ public class serverBridge {
             a.show();
             System.out.println("ERROR");
         }
+
     }
+    public String getSecuirtyQuestion(String usn){
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement();) {
+            System.out.println("Getting Security Question");
+            String sql = "SELECT sq from customerdata WHERE user_name ='"+usn+"'";
+            ResultSet rs=stmt.executeQuery(sql);
+            String securityQuestion=resultSetChecker(rs);
+            return securityQuestion;
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            Alert a=new Alert(Alert.AlertType.NONE);
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setTitle("USERNAME DOES NOT EXIST");
+            a.setContentText("This username does not exist, please create a new account");
+            a.show();
+
+        }
+        return "";
+    }
+
+    public String getSecuirtyAnswer(String usn){
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement();) {
+            System.out.println("Getting Security Question");
+            String sql = "SELECT sa from customerdata WHERE user_name ='"+usn+"'";
+            ResultSet rs=stmt.executeQuery(sql);
+            String securityAnswer=resultSetChecker(rs);
+            return securityAnswer;
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return "";
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -95,7 +142,7 @@ public class serverBridge {
             System.out.println("Reading TotalBTC");
             String sql = "SELECT btc_owned from customerdata WHERE user_name ='" + userName + "'";
             ResultSet rs = stmt.executeQuery(sql);
-            String btcOwned = passwordChecker(rs);
+            String btcOwned = resultSetChecker(rs);
             return Double.parseDouble(btcOwned);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -108,7 +155,7 @@ public class serverBridge {
                 System.out.println("Reading TotalBTC");
                 String sql = "SELECT btc_spent from customerdata WHERE user_name ='" + userName + "'";
                 ResultSet rs = stmt.executeQuery(sql);
-                String btcSpent = passwordChecker(rs);
+                String btcSpent = resultSetChecker(rs);
                 return Double.parseDouble(btcSpent);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -143,7 +190,7 @@ public class serverBridge {
             System.out.println("Reading TotalETH");
             String sql = "SELECT eth_owned from customerdata WHERE user_name ='" + userName + "'";
             ResultSet rs = stmt.executeQuery(sql);
-            String ethOwned = passwordChecker(rs);
+            String ethOwned = resultSetChecker(rs);
             return Double.parseDouble(ethOwned);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -156,7 +203,7 @@ public class serverBridge {
             System.out.println("Reading TotalETH");
             String sql = "SELECT eth_spent from customerdata WHERE user_name ='" + userName + "'";
             ResultSet rs = stmt.executeQuery(sql);
-            String ethSpent = passwordChecker(rs);
+            String ethSpent = resultSetChecker(rs);
             return Double.parseDouble(ethSpent);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

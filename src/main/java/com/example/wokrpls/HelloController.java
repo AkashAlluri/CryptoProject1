@@ -157,7 +157,7 @@ public class HelloController {
         this.Generate.fire();
     }
     String currentUser;
-    public void readCurrentUser(){
+    public String readCurrentUser(){
         try {
             File myObj = new File("userName.txt");
             Scanner myReader = new Scanner(myObj);
@@ -171,6 +171,7 @@ public class HelloController {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return currentUser;
     }
 
     public void initializeCoins(){

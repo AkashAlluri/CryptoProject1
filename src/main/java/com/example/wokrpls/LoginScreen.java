@@ -73,23 +73,28 @@ Label logo;
         }
     }
 
+@FXML Button createAccount;
+    public void createAccount(ActionEvent event) throws IOException {
+        Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
+        Stage stage1 = new Stage();
+        Scene scene = new Scene(part);
+        stage1.setScene(scene);
+        stage1.show();
+        Stage stage = (Stage) createAccount.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+@FXML Hyperlink forgotPassword;
+    public void forgotPassword(ActionEvent event) throws IOException {
+        Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("forgotPasswordUsernameScene.fxml")));
+        Stage stage1 = new Stage();
+        Scene scene = new Scene(part);
+        stage1.setScene(scene);
+        stage1.show();
+        Stage stage = (Stage) forgotPassword.getScene().getWindow();
+        // do what you have to do
+        stage.close();
 
-    public void createAccount(ActionEvent event){
-        String un=IdField.getText();
-        String pwd=passwordField.getText();
-        if(un.isBlank() || pwd.isBlank()){
-            Alert a=new Alert(Alert.AlertType.NONE);
-            a.setAlertType(Alert.AlertType.ERROR);
-            a.setTitle("Cant create new account");
-            a.setContentText("Username or Password cant be blank");
-            a.show();
-        }
-        else {
-            serverBridge sb = new serverBridge();
-            sb.createAccount(un, pwd);
-            Alert a=new Alert(Alert.AlertType.NONE);
-
-        }
     }
 
 }

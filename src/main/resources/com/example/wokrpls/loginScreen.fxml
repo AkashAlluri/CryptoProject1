@@ -40,7 +40,9 @@
       <GridPane.margin>
          <Insets left="-5" />
       </GridPane.margin></Button>
+   <Hyperlink fx:id="forgotPassword" onAction="#forgotPassword" text="Forgot Password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
    <rowConstraints>
+      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />

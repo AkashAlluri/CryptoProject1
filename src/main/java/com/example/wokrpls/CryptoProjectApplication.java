@@ -16,6 +16,7 @@ public class CryptoProjectApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(CryptoProjectApplication.class.getResource("loginScreen.fxml"));
         System.out.println(5);
        // Scene scene = new Scene(fxmlLoader.load(), 900, 650);
+
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.BLACK);
         stage.setTitle("SOFT ENG PROJ");
