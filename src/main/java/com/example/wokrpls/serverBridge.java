@@ -109,6 +109,17 @@ public class serverBridge {
         }
         return "";
     }
+    public void updatePassword(String userName, String password){
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement();) {
+            System.out.println("Transaction Register");
+            String sql = "UPDATE customerdata set password='"+password+"' WHERE user_name ='" + userName + "'";
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
 
 

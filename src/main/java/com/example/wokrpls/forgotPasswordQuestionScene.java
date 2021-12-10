@@ -47,13 +47,20 @@ public class forgotPasswordQuestionScene {
         stage.close();
     }
 
-    public void confirmAnswer(ActionEvent event){
+    public void confirmAnswer(ActionEvent event) throws IOException {
         String answer=securityAnswerTextField.getText();
         serverBridge sb=new serverBridge();
         String serverAnswer=sb.getSecuirtyAnswer(username);
 
         if(answer.equals(serverAnswer)){
-
+            Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("setNewPasswordScene.fxml")));
+            Stage stage1 = new Stage();
+            Scene scene = new Scene(part);
+            stage1.setScene(scene);
+            stage1.show();
+            Stage stage = (Stage)backToLoginLink.getScene().getWindow();
+            // do what you have to do
+            stage.close();
         }
         else{
             Alert a=new Alert(Alert.AlertType.NONE);
