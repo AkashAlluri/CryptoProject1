@@ -88,10 +88,7 @@ Label logo;
             serverBridge sb = new serverBridge();
             sb.createAccount(un, pwd);
             Alert a=new Alert(Alert.AlertType.NONE);
-            a.setAlertType(Alert.AlertType.CONFIRMATION);
-            a.setTitle("Account Created");
-            a.setContentText("Your account has been created.");
-            a.show();
+
         }
     }
 

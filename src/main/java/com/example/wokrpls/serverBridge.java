@@ -55,9 +55,10 @@ public class serverBridge {
     public void createAccount(String username, String password){
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
-            System.out.println("Create New Account");
+            System.out.println("Creating New Account");
             String sql = "INSERT into customerdata values ('"+username+"','"+password+"',0,0,0,0)";
-            System.out.println(stmt.execute(sql));
+            stmt.execute(sql);
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -85,7 +85,9 @@ public class HelloController {
 
     private String doubleDigitConverter(String toString) {
         int length=toString.length();
+        System.out.println(length);
         StringBuilder finalString= new StringBuilder();
+        if(length<=3)return toString;
 
         for(int i=0;i<length;i++){
             if(toString.charAt(i)!='.'){
