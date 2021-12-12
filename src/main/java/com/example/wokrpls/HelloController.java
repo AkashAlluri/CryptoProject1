@@ -30,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HelloController {
+    // main controller for application
     ObservableList<String> coins = FXCollections.observableArrayList(new String[]{"BTC-USD", "ETH-USD", "DOGE-USD"});
     @FXML
     LineChart<String, Number> lineChart;
@@ -59,6 +60,7 @@ public class HelloController {
     public void firegen(){this.Generate.fire();}
 
     public void chartGen(ActionEvent event) throws IOException, ParseException {
+        // generates a chart using the data fetched from the api
         this.lineChart.getData().clear();
         Series<String, Number> series = new Series();
         String s = (String)this.coin.getSelectionModel().getSelectedItem();
@@ -85,6 +87,7 @@ public class HelloController {
     }
 
     private String doubleDigitConverter(String toString) {
+        // converts double digit numbers
         int length=toString.length();
         System.out.println(length);
         StringBuilder finalString= new StringBuilder();
@@ -108,6 +111,7 @@ public class HelloController {
 
     @FXML
     void initialize() {
+        // initialize the application
         readCurrentUser();
         this.coin.setValue("BTC-USD");
         this.coin.setItems(this.coins);
@@ -121,6 +125,7 @@ public class HelloController {
     }
 
     void specificCoinData(Coin c, BigDecimal price) {
+        // function to retrieve specific data about a coin
         Crypto var10000 = this.cryptoObject;
         double aR = Crypto.absoluteReturn(price, c.getCoinsOwned(), c.getAmountSpent());
         double coinsOwned = c.getCoinsOwned();
@@ -131,6 +136,7 @@ public class HelloController {
     }
 
     public void transactionWrapper(ActionEvent event) {
+        // transaction helper function
         firegen();
         String s = (String)this.coin.getSelectionModel().getSelectedItem();
         double q = Double.parseDouble(this.quantity.getText());
@@ -146,6 +152,7 @@ public class HelloController {
     }
 
     public void transaction(Coin c, double q, double p) {
+        // function to determine whether a cryptocurrency was being bought or sold
         if (q < 0.0D) {
             c.iSoldSome(p, q);
         } else if (q > 0.0D) {
@@ -160,6 +167,7 @@ public class HelloController {
     }
     String currentUser;
     public String readCurrentUser(){
+        // get the current logged in user in the session
         try {
             File myObj = new File("userName.txt");
             Scanner myReader = new Scanner(myObj);
@@ -177,6 +185,7 @@ public class HelloController {
     }
 
     public void initializeCoins(){
+        // initialize coins on startup
         serverBridge sb=new serverBridge();
         BTC.setAmountSpent(sb.getTotalSpentBTC(currentUser));
         BTC.setCoinsOwned(sb.getTotalBTC(currentUser));
@@ -187,6 +196,7 @@ public class HelloController {
     }
 
     public void registerOnServer(){
+        // helper function to register transactions in the database
         serverBridge sb=new serverBridge();
         sb.registerTransactionBTC(currentUser, BTC);
         sb.registerTransactionETH(currentUser, ETH);

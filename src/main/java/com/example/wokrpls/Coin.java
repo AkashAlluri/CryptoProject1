@@ -1,4 +1,5 @@
 package com.example.wokrpls;
+// class to represent a cryptocurrency coin object
 
 import javafx.scene.control.Alert;
 
@@ -18,11 +19,13 @@ public class Coin {
     }
 
     void iBoughtSome(Double moneySpent, Double coinsBought){
+        // simulates buying of a coin
         amountSpent+=(coinsBought*moneySpent);
         coinsOwned+=coinsBought;
     }
 
     void iSoldSome(Double moneyMade, Double coinsSold){
+        // simulates selling of a coin
         if(coinsSold*-1 > coinsOwned){
             Alert a=new Alert(Alert.AlertType.NONE);
             a.setAlertType(Alert.AlertType.ERROR);
@@ -36,6 +39,7 @@ public class Coin {
         }
     }
 
+    // setter functions
     void setAmountSpent(Double as){amountSpent=as;}
     void setCoinsOwned(Double cs){coinsOwned=cs;}
 }

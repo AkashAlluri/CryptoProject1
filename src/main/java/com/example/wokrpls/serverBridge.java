@@ -1,4 +1,8 @@
 package com.example.wokrpls;
+// used to connect to the database
+// taken from slides
+
+
 import javafx.scene.control.Alert;
 
 import java.io.File;
@@ -7,14 +11,18 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class serverBridge {
+
+    // variables used to connect to the database
+    // IF RUNNING ON LOCAL MACHINE, CHANGE THESE TO YOUR RESPECTIVE URLS, USERNAME AND PASSWORD FOR YOUR DATABASE
     static final String DB_URL = "jdbc:mysql://root@localhost:3306/crypto1";
     static final String USER = "root";
-    static final String PASS = "toor";
-
-
+    static final String PASS = "password";
 
 
     public boolean checkLogin(String username, String password){
+        // User authentication function
+        // checks to see if the entered password matches the password stored in the database for the inputted username
+        // if the passwords match, log the user into the system
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Checking if password matches for username");
@@ -39,6 +47,7 @@ public class serverBridge {
 
 
     public String resultSetChecker(ResultSet resultSet) throws SQLException {
+        // helper function for checking values in the database
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnsNumber = rsmd.getColumnCount();
         while (resultSet.next()) {
@@ -53,6 +62,9 @@ public class serverBridge {
 
 
     public void createAccount(String username, String password, String sq, String sa){
+        // function used to create an account in the database.
+        // inserts a new tuple into the customerdata relation
+        // requires a username, password, security question and security answer
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Creating New Account");
@@ -72,6 +84,8 @@ public class serverBridge {
 
     }
     public String getSecuirtyQuestion(String usn){
+        // function to fetch the security question from the database
+        // used in reset password functionality
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Getting Security Question");
@@ -94,6 +108,8 @@ public class serverBridge {
     }
 
     public String getSecuirtyAnswer(String usn){
+        // function to fetch the security answer associated with the inputted username from the database
+        // used in password reset functionality
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Getting Security Question");
@@ -110,6 +126,8 @@ public class serverBridge {
         return "";
     }
     public void updatePassword(String userName, String password){
+        // function to update the password with an inputted username
+        // used in the password reset functionalities
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
             System.out.println("Transaction Register");

@@ -17,6 +17,7 @@ class Crypto {
     static ArrayList<BigDecimal> Price=new ArrayList<BigDecimal>();
 
     public static void getPrices(String coin, int timeframe) throws IOException, ParseException {
+        // fetch prices from the database
         Price.clear();
         PriceDates.clear();
         Calendar from = Calendar.getInstance();
@@ -44,11 +45,13 @@ class Crypto {
     }
     public static void convert(String date) throws ParseException {
 
+        // helper function to convert dates
         SimpleDateFormat fd = new SimpleDateFormat("dd/MM/yyyy");
         Date d = fd.parse(date);
     }
 
     public static double absoluteReturn(BigDecimal currentPrice, Double totalOwned, Double totalSpent){
+        // function to calculate the absolute return on investment
         double aR= (totalOwned* currentPrice.doubleValue())-totalSpent;
         return aR;
     }

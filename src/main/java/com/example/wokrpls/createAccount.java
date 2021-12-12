@@ -35,6 +35,8 @@ public class createAccount {
 
 
     public void backToLogin() throws IOException {
+        // function to handle when the back to login button is pressed
+        // brings user back to the login page
         Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScreen.fxml")));
         Stage stage1 = new Stage();
         Scene scene = new Scene(part);
@@ -46,12 +48,14 @@ public class createAccount {
     }
 
     public void createNewAccount(){
+        // function to create a new account
         String username=usernameTextField.getText();
         String password=passwordTextField.getText();
         String confirmPassword=confirmPasswordTextField.getText();
         String securityq=(String)this.securityQuestionChoiceBox.getSelectionModel().getSelectedItem();
         String securitya=securityAnswerTextField.getText();
         if(username.isBlank() || password.isBlank() || confirmPassword.isBlank() || securitya.isBlank()){
+            // if any of the fields are blank, dont create account
             Alert a=new Alert(Alert.AlertType.NONE);
             a.setAlertType(Alert.AlertType.ERROR);
             a.setTitle("Could not create Account");
@@ -59,6 +63,7 @@ public class createAccount {
             a.show();
         }
         else{
+            /// create the account
             serverBridge sb=new serverBridge();
             sb.createAccount(username,password,securityq,securitya);
         }
@@ -66,6 +71,7 @@ public class createAccount {
 
     @FXML
     public void initialize(){
+        // initialize the choicebox with the premade security questions
         securityQuestionChoiceBox.setItems(questions);
         securityQuestionChoiceBox.setValue(q1);
     }

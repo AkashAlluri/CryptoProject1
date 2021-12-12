@@ -1,4 +1,5 @@
 package com.example.wokrpls;
+// LoginScreen class
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +27,10 @@ public class LoginScreen {
     serverBridge sb=new serverBridge();
 
     public void checkLogin(ActionEvent event) throws IOException {
+        // function to simulate user authentication
+        // uses the checkLogin function in serverbridge to check to make sure that the
+        // inputted username and password are a match in the database
+        // if successful, the user is logged into the system.
         Stage stage = (Stage) login.getScene().getWindow();
         System.out.println("Passing: "+ IdField.getText() +"\n "+passwordField.getText());
         if(sb.checkLogin(IdField.getText(), passwordField.getText())) {
@@ -46,6 +51,7 @@ Label logo;
 
     @FXML
     void initialize() {
+        // initializes the javafx view
         ImageView img = new ImageView("esoflogo.png");
         img.setFitHeight(100);
         img.setFitWidth(100);
@@ -53,6 +59,7 @@ Label logo;
     }
 
     void saveUserName(String name){
+        // save the username to a file
         try {
             File myObj = new File("userName.txt");
             if (myObj.createNewFile()) {
@@ -75,6 +82,9 @@ Label logo;
 
 @FXML Button createAccount;
     public void createAccount(ActionEvent event) throws IOException {
+        // create account function
+        // invoked when the createaccount button is pressed
+        // brings the user to the createAccount scene
         Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
         Stage stage1 = new Stage();
         Scene scene = new Scene(part);
@@ -85,6 +95,8 @@ Label logo;
         stage.close();
     }
 @FXML Hyperlink forgotPassword;
+    // forgot password function
+    // invoked when the forgotPassword hyperlink is pressed
     public void forgotPassword(ActionEvent event) throws IOException {
         Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("forgotPasswordUsernameScene.fxml")));
         Stage stage1 = new Stage();

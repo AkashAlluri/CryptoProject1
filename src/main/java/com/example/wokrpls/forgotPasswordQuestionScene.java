@@ -1,4 +1,5 @@
 package com.example.wokrpls;
+// invoked when the user reaches the security question step of the forgot password process
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +31,7 @@ public class forgotPasswordQuestionScene {
 
     @FXML
     void initialize(){
+        // get the security question from the database for the associated username entered in the previous step
 
         serverBridge sb=new serverBridge();
         String question=sb.getSecuirtyQuestion(username);
@@ -37,6 +39,8 @@ public class forgotPasswordQuestionScene {
     }
 
     public void backToLogin() throws IOException {
+        // function to handle when the backToLogin button has been pressed
+        // aborts forgot password process
         Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScreen.fxml")));
         Stage stage1 = new Stage();
         Scene scene = new Scene(part);
@@ -48,6 +52,7 @@ public class forgotPasswordQuestionScene {
     }
 
     public void confirmAnswer(ActionEvent event) throws IOException {
+        // determine whether the inputted security answer matches the security answer stored in the database
         String answer=securityAnswerTextField.getText();
         serverBridge sb=new serverBridge();
         String serverAnswer=sb.getSecuirtyAnswer(username);

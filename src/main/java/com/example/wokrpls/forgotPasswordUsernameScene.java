@@ -25,6 +25,7 @@ public class forgotPasswordUsernameScene {
     Button confirmUsernameButton;
 
     public void confirmUsername(ActionEvent event) throws IOException {
+        // function to determine whether the two username fields are equal or not
         String username=usernameTextField.getText();
         String username2=confirmUsernameTextField.getText();
 
@@ -43,6 +44,7 @@ public class forgotPasswordUsernameScene {
             a.show();
         }
         else{
+            // when the two usernames entered are equal...
             serverBridge sb=new serverBridge();
             sb.getSecuirtyQuestion(username);
             LoginScreen ls=new LoginScreen();
@@ -63,6 +65,7 @@ public class forgotPasswordUsernameScene {
 
 
     public void backToLogin() throws IOException {
+        // function to handle whether the backToLogin button has been pressed
         Parent part = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScreen.fxml")));
         Stage stage1 = new Stage();
         Scene scene = new Scene(part);
