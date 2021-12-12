@@ -131,7 +131,7 @@ public class HelloController {
     }
 
     public void transactionWrapper(ActionEvent event) {
-        firegen();
+        //firegen();
         String s = (String)this.coin.getSelectionModel().getSelectedItem();
         double q = Double.parseDouble(this.quantity.getText());
         double p = Double.parseDouble(this.price.getText());
